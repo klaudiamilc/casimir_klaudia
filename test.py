@@ -9,3 +9,7 @@ def area(radius):
     
 a = area(10)
 print(a)
+
+def circumference(radius):
+	c=2*np.pi*radius
+	return(c)
