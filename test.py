@@ -11,3 +11,8 @@ def area(radius):
 def circumference(radius):
 	c=2*np.pi*radius
 	return(c)
+
+def drawcircle(radius):
+    x = np.linspace(-radius, radius, 100)
+    y = np.sqrt(radius**2-x**2)
+    return[x, y]

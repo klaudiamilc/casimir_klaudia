@@ -1,6 +1,16 @@
-print('this is a script')
 import test
+import numpy as np
+import matplotlib.pyplot as plt
 
-area = test.area(10)
+radius = 10
+area = test.area(radius)
 
-print(area)
+print('Area is = ', area)
+
+[x,y] = test.drawcircle(radius)
+
+fig, axes = plt.subplots()
+axes.plot(x, y)
+axes.plot(x, -y)
+
+fig.savefig('circle.png')
