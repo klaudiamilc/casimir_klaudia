@@ -86,13 +86,15 @@ for i in range(len(scattered_points)-1):
     
 arr = np.array(angles)
 index_min = np.argmin(arr)
+updated_location_and_slope = [scattered_points[index_min],angles[index_min]]
 print(angles)
 print(index_min)
-print (scattered_points[index_min])
+print 
+print (scattered_points[index_min],angles[index_min])
 print(type(arr))
 
 
 
 # -
 
-scattered_points[0][1]
+
