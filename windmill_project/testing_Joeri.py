@@ -89,12 +89,45 @@ index_min = np.argmin(arr)
 updated_location_and_slope = [scattered_points[index_min],angles[index_min]]
 print(angles)
 print(index_min)
-print 
+print(updated_location_and_slope)
 print (scattered_points[index_min],angles[index_min])
 print(type(arr))
 
 
 
-# -
+# +
+# %matplotlib widget
+import numpy as np
+import matplotlib.pyplot as plt
+from numpy import ones,vstack
+from numpy.linalg import lstsq
+from matplotlib.animation import FuncAnimation
 
+N = 5
+x = np.random.normal(0, 5, (N, 2))
+x0 = [0,0]
+
+
+# +
+def closest_point(x0,x):
+    combination_data = []
+    for xi in x:
+        r = ((x0[0]-xi[0])**2+(x0[1]-xi[1])**2)**0.5
+        delta_y = (x0[1]-xi[1])
+        sin_angle = (delta_y/r)
+        combination_data.append(sin_angle)
+    min_angle = min(combination_data)
+    search_list = np.array(combination_data)
+    index_smallest = np.where(search_list==min_angle)
+    new_point = x[index_smallest[0][0]]
+    return new_point
+
+fig, axes = plt.subplots()
+axes.scatter(*x.T)
+axes.scatter(*x0)
+
+print(x)
+y = closest_point(x0,x)
+axes.scatter(*y)
+print(y)
 
