@@ -4,7 +4,7 @@ from numpy import ones,vstack
 from numpy.linalg import lstsq
 from matplotlib.animation import FuncAnimation
 
-N = 1 #number of scattered points
+N = 10 #number of scattered points
 x = np.random.normal(0, 5, (N, 2))
 
 
@@ -29,20 +29,20 @@ axes.scatter(start_point[0], start_point[1])
 axes.set_xlim(np.min(x[:, 0])-10, np.max(x[:, 0])+10)
 line, = axes.plot([], [], lw=3)
 
-def init():
-    line.set_data([], [])
-    return line,
-def animate(i):
-    r = 10
-    x = line_x
-    y = np.sqrt(np.abs(r**2-x**2))
-    line.set_data(x, y)
-    return line,
+# def init():
+#     line.set_data([], [])
+#     return line,
+# def animate(i):
+#     r = 10
+#     x = line_x
+#     y = np.sqrt(np.abs(r**2-x**2))
+#     line.set_data(x, y)
+#     return line,
 
-anim = FuncAnimation(fig, animate, init_func=init,
-                               frames=200, interval=20, blit=True)
+# anim = FuncAnimation(fig, animate, init_func=init,
+#                                frames=200, interval=20, blit=True)
 
-anim.save('rot_line.gif', writer='imagemagick')
+# anim.save('rot_line.gif', writer='imagemagick')
 
 
 # +
@@ -71,20 +71,17 @@ for i in range(len(x)):
     angles.append(y)
 arr = np.array(angles)
 
-srt = np.argsort(arr) # returns indices for sorted angles, index 1 is the next one after 0
-smallest = np.where(srt == 0)
-smallest_angle = arr[smallest] # smallest angle after 0
-point_coord = x[2] #coordinates of the point which has the smallest angle to the current centre of rot.
+srt = np.sort(arr)
+smallest_angle = srt[1]
+index_smallest = np.where(arr==smallest_angle)
+point_coord = x[index_smallest[0]] #coordinates of the point which has the smallest angle to the current centre of rot.
+point_coord = point_coord[0]
 print(point_coord)
 # -
-
-print(angles)
-
-print(smallest_angle)
 
 fig, axes = plt.subplots()
 axes.scatter(*x.T)
 axes.scatter(start_point[0], start_point[1])
-axes.scatter(point_coord[0], point_coord[0])
+axes.scatter(point_coord[0], point_coord[1])
 
 
